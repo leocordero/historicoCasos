@@ -1,0 +1,151 @@
+{% extends 'main/base_main.html' %}
+
+{% block body %}
+<!-- Start cat Area -->
+	<!-- Start service Area -->
+	<section class="service-area section-gap" id="service">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 pb-30 header-text text-center">
+					<h1 class="mb-10">Cisco - Telmex</h1>
+					<p>Casos, responsable, c&oacute;digos de cierre</p>
+				</div>
+			</div>						
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="single-service">
+						<div class="thumb">
+							<img src="images/s1.jpg" alt="">									
+						</div>
+						<h4>Carrier Ethernet</h4>
+						<p>Telmex<br><canvas id="doughnutChart"></p>
+
+						<p>Cisco<br><canvas id="doughnutChart2"></p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="single-service">
+						<div class="thumb">
+							<img src="img/s2.jpg" alt="">									
+						</div>
+						<h4>Optica</h4>
+						<p>Telmex<br><canvas id="doughnutChart3"></p>
+						<p>Cisco<br><canvas id="doughnutChart4"></p>
+
+					</div>
+				</div>
+												
+			</div>
+		</div>	
+	</section>
+	<!-- End service Area -->
+	<!-- Start faq Area -->
+	<section class="faq-area section-gap relative">
+		<div class="overlay overlay-bg"></div>
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<br>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5><span class="counter">{{ eq_ce }}</span></h5>
+						<p>Equipos Carrier Ethernet</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5><span class="counter">{{ casos_ce }}</span></h5>
+						<p>Casos Carrier Ethernet</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5 class="counter">{{ eq_op }}</h5>
+						<p>Equipos Optica</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5 class="counter">{{ casos_op }}</h5>
+						<p>Casos Optica</p>
+					</div>
+				</div>																		
+			</div>
+		</div>	
+	</section>
+	<!-- End faq Area -->
+	<section class="cat-area section-gap" id="feature">
+		<div class="container">							
+			<div class="row">
+				<div class="col-lg-4">	
+					<div class="single-cat d-flex flex-column">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-magic-wand"></span></span></a>
+						<h4 class="mb-20" style="margin-top: 23px;">Maintenance</h4>
+						<p>
+							Conocer si un problema es recurrente en un equipo.
+						</p>
+					</div>															
+				</div>
+				<div class="col-lg-4">	
+					<div class="single-cat">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-rocket"></span></span></a>
+						<h4 class="mt-40 mb-20">Residental Service</h4>
+						<p>
+							Posibilidad de realizar busquedas con diferentes opciones.
+						</p>
+					</div>															
+				</div>
+				<div class="col-lg-4">
+					<div class="single-cat">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-bug"></span></span></a>
+						<h4 class="mt-40 mb-20">Commercial Service</h4>
+						<p>
+							Conocer problemas reportados y la soluci&oacute;n brindada.
+
+						</p>
+					</div>							
+				</div>
+			</div>
+		</div>	
+	</section>
+	<script>
+	//doughnut
+	var ctxD = document.getElementById("doughnutChart").getContext('2d');
+	var ctxD3 = document.getElementById("doughnutChart2").getContext('2d');
+	var ctxD3 = document.getElementById("doughnutChart3").getContext('2d');
+	var ctxD4 = document.getElementById("doughnutChart4").getContext('2d');
+
+	var myLineChart = new Chart(ctxD, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for estad in casos_resumen_cisco_ce %} 
+				"{{ estad.responsable2  }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		                data: [{% for estad in casos_resumen_cisco_ce %} 
+			{{ estad.cantidad  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+	                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true
+	    }
+	});
+	</script>
+	<!-- End cat Area -->
+{% endblock %}

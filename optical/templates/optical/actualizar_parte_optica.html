@@ -1,0 +1,48 @@
+<html>
+<head>
+{% load staticfiles %}
+<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+<style>
+ label,p{
+   font-size: 14px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+<input type="hidden" name="parte_id" value="{{ parte_id }}">
+<input type="checkbox" name="disponible" value="1" checked> 
+<label>Disponible </label><br><br>
+<input type="button" value="Aceptar" id="Aceptar"><br>
+<p>*Al cambiar el estatus de la parte, esta ya no se mostrara como disponible</p>
+<p>*Si la refacci&oacute;n esta instalada en otro sitio, asegurarse antes de disponer de esta parte que en el equipo donde esta instalada, no tenga servicios asociados y no cause afectaci&oacute;n</p>
+<br>
+<p id="mensaje">.</p>
+<script>
+$("#Aceptar").click(function() {
+      var tipo = $("[name=disponible]:checked").val();
+      if ($("[name=disponible]:checked").is(":checked")){
+	  tipo = 1;
+      }
+      else{
+	  tipo = 0;
+      }
+      alert(tipo);
+	$.ajax({
+        type: "GET",
+        url: "/optica/actualizar_inventario_parte_optica_resultado/",
+	data: { 
+        "status": tipo,
+	"parte_id": {{ parte_id }},
+        },
+        success: function (data) {
+            $("#mensaje").html(data);
+        }
+	});
+    });
+</script>
+
+</body>
+</html>

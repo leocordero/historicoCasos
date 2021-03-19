@@ -1,0 +1,110 @@
+{% extends 'main/base_optical.html' %}
+
+{% block body %}
+<!-- Start cat Area -->
+<style>
+
+table {
+        width: 95%;	
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 40px;
+    padding: 5px;
+    /*text-align: left;*/
+}
+
+tbody {
+    height: 420px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    --width: 12.5%;
+    --float: left;
+}
+#col-1{
+    width: 16%;
+    float: left;
+}
+
+#col-2{
+    width: 17%;
+    float: left;
+}
+#col-3{
+    width: 23%;
+    float: left;
+}
+#col-4{
+    width: 6%;
+    float: left;
+}
+#col-5{
+    width: 40%;
+    float: left;
+}
+#col-6{
+    width: 27%;
+    float: left;
+}
+
+
+#col-x{
+    width: 4%;
+    float: left;
+}
+</style>
+<section class="service-area section-gap" id="home">
+<div class="container">
+  <div class="col-md-8">
+  </div>
+  <div class="col-md-2">
+    <select><option>Estado</option></select>
+  </div>
+  <div class="col-md-2">
+    <select>
+      <option>Todo</option>
+      <option>Deposito</option>
+      <option>Ambulancia</option>
+    </select>
+  </div>
+  <div class="col-md-12">
+     <table class="table table-striped" id="example">
+     <thead>
+     <tr><th id="col-1">Estado</th><th id="col-1">Ciudad</th><th id="col-1">Central</th><th id="col-1">Refacci&oacute;n</th></tr>
+     </thead>
+     <tbody>
+	{% for inv in inventario %}
+	  <tr><td id="col-1">{{ inv.estado }}</td><td id="col-1">{{ inv.ciudad }}</td><td id="col-1">{{ inv.central }}</td><td id="col-1">{{ inv.parte_optica }}</td></tr>
+	{% endfor %}
+     </tbody>
+     </table>
+  </div>
+  <div class="col-md-4">
+   <br>
+   <input type="button" value="Agregar refacci&oacute;n">
+  </div>
+  <div class="col-md-8">
+  </div>
+
+</div>
+</section>
+<!-- End cat Area -->
+
+{% endblock %}

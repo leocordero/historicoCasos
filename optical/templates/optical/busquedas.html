@@ -1,0 +1,129 @@
+{% extends 'main/base_optical.html' %}
+
+{% block body %}
+<!-- Start cat Area -->
+<style>
+
+table {
+        width: 95%;	
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 40px;
+    padding: 5px;
+    /*text-align: left;*/
+}
+
+tbody {
+    height: 420px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    --width: 12.5%;
+    --float: left;
+}
+#col-1{
+    width: 16%;
+    float: left;
+}
+
+#col-2{
+    width: 17%;
+    float: left;
+}
+#col-3{
+    width: 23%;
+    float: left;
+}
+#col-4{
+    width: 6%;
+    float: left;
+}
+#col-5{
+    width: 40%;
+    float: left;
+}
+#col-6{
+    width: 27%;
+    float: left;
+}
+
+
+#col-x{
+    width: 4%;
+    float: left;
+}
+#resultado2 {
+  position:static;
+  width:100%;
+  -height:240px;
+  border:0px solid black;
+  padding:0px;
+}
+#resultado2 > div{
+  float:right;
+  margin:0px;
+}
+#d1{
+  width:50%;
+  -height:200px;
+  border:0px solid;
+}
+
+#d2{
+  width:50%;
+  -height:200px;
+  border:0px solid;
+}
+</style>
+<section class="service-area section-gap" id="home">
+<div class="container">
+  <div class="col-md-12">
+	<form method="post">
+	{% csrf_token %}
+	<h2 class="mb-10">Busquedas red optica</h2>
+	<input type="radio" name="tipo" id="sn" value="sn" class="rad">&nbsp;Por n&uacute;mero serial
+	<br>
+	<input type="radio" name="tipo" id="parte" value="parte" class="rad">&nbsp;Por c&oacute;digo de parte
+	<br>
+	<input type="radio" name="tipo" id="nodo" value="nodo" class="rad">&nbsp;Por Nodo
+	<br><br>
+	<div id="criterio">
+	  <div id="b_serial" style="display:none">Ingrese el Serial <input type="text" id="in_serial" name="in_serial"></div>
+	  <div id="b_parte" style="display:none">Ingrese el n&uacute;mero de parte <input type="text" id="in_parte" name="in_parte"></div>
+	  <div id="b_nodo" style="display:none">Ingrese el CLLI del nodo <input type="text" id="in_nodo" name="in_nodo"></div> 
+	  <div id="b_buscar" style="display:none"><input type="button" value="Buscar" id="buscar"></div>
+	  <br>
+	</div>
+	<div class="col-md-12">
+	  <div id="resultado"></div>
+	  <div id="resultado2">
+	    <div id="d1"></div>
+	    <div id="d2"></div>
+	  </div>
+	</div>
+	</form>
+	
+
+  </div>
+</div>
+</section>
+<!-- End cat Area -->
+
+{% endblock %}

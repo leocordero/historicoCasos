@@ -1,0 +1,132 @@
+{% extends 'main/base_optical.html' %}
+
+{% block body %}
+<!-- Start cat Area -->
+<style>
+table {
+        width: 95%;
+	
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 40px;
+    padding: 5px;
+    /*text-align: left;*/
+}
+
+tbody {
+    height: 420px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    --width: 12.5%;
+    --float: left;
+}
+#col-1, #col-2, #col-3, #col-5, #col-6{
+    width: 14%;
+    float: left;
+}
+
+#col-4, #col-7,#col-8{
+    width: 10%;
+    float: left;
+}
+#col-x{
+    width: 4%;
+    float: left;
+}
+
+
+</style>
+
+<section class="service-area section-gap" id="home">
+<div class="container">
+  <div class="col-md-12">
+	<h2 class="mb-10">Equipos red Optica</h2>
+
+	<table class="table table-striped">
+	<thead>
+	  <tr>
+	    <th id="col-1"><a href="#">Estado</a></th>
+	    <th id="col-2"><a href="#">Ciudad</a></th>
+	    <th id="col-3"><a href="#">Central</a></th>
+	    <th id="col-4"><a href="#">Dir. Divis.</a></th>
+	    <th id="col-5"><a href="#">Modelo Equipo</a></th>
+	    <th id="col-6"><a href="#">CLLI</a></th>
+	    <th id="col-7"><a href="#">IP</th>
+	    <th id="col-8"><a href="#">Casos</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for equipos in inventario %}
+	  <tr>
+	    <td id="col-1">{{ equipos.estado }}</td>
+	    <td id="col-2">{{ equipos.ciudad }}</td>
+	    <td id="col-3">
+		{% if equipos.cliente == None %}
+		{{ equipos.central }}
+		{% elif equipos.central == None %}
+		{{ equipos.cliente }}
+		{% endif %}</td>
+	    <td id="col-4">{{ equipos.dir_divisional }}</td>
+	    <td id="col-5">{{ equipos.modelo_equipo }}</td>
+	    <td id="col-6"><a class='iframe' href="{% url 'detalle_equipo_optico' equipos.id %}" data-lightbox-title="Detalles" data-lightbox-description="<p>{{ equipos.ne_id }}</p>" data-lightbox-iframe-scroll="true">{{ equipos.ne_id }}</a></td>
+	    <td id="col-7">{{ equipos.ip }}</td>
+	    <td id="col-8">
+		{% if equipos.casos == 0 %}
+		{{ "-" }}
+		{% elif equipos.casos > 0 and equipos.casos <= 5 %}
+		<a class='iframe' href="{% url 'historico_casos_optica' equipos.id %}">{{ equipos.casos }}</a>
+		{% elif equipos.casos > 5 %}
+		<a class='iframe' href="{% url 'historico_casos_optica' equipos.id %}">{{ equipos.casos}} <img src="/static/images/fuego.png" width="20" height="20"></a>
+		{% endif %}</td>
+	  </tr>
+	  {% endfor %}
+	</tbody>
+	</table>
+	<br>
+	<strong>{{ total }}</strong> Equipos registrados
+	<br>
+	<table class="table table-sm">
+	<thead>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-hdd"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.equipos }}</td>
+	    {% endfor %}
+	  </tr>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-wrench"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.casos }}</td>
+	    {% endfor %}
+	  </tr>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-scale"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.porc }} %</td>
+	    {% endfor %}
+	  </tr>
+	</thead>
+	</table>
+  </div>
+</div>
+</section>
+<!-- End cat Area -->
+{% endblock %}

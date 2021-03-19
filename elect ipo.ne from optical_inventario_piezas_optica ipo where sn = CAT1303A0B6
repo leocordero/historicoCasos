@@ -1,0 +1,6 @@
+  id   |     ne      | equipment_type | actual_equipment_type | physical_location | hw_part_number |     sn      | equipment_state | product_id  | mes | anio | id_ne 
+-------+-------------+----------------+-----------------------+-------------------+----------------+-------------+-----------------+-------------+-----+------+-------
+     5 | ACPTXNACO02 | TCC            | TCC2                  | Slot-11           | 800-24766-06   | CAT1303A0B6 | Standby         | 15454-TCC2P |   3 | 2019 |  1715
+ 61033 | ACPTXNACO02 | TCC            | TCC2                  | Slot:11           | 800-24766-06   | CAT1303A0B6 | Standby         | 15454-TCC2P |   4 | 2019 |  1715
+(2 rows)
+

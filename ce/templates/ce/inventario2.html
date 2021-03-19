@@ -1,0 +1,102 @@
+{% extends 'main/base_ce.html' %}
+
+{% block body %}
+<!-- Start cat Area -->
+<style>
+/* DivTable.com */
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	border: 0px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+	height: 420px;
+	overflow-y: auto;
+}</style>
+
+<section class="service-area section-gap" id="home">
+<div class="container">
+  <div class="col-md-12">
+	<h2 class="mb-10">Equipos red CE</h2>
+
+	<div class="divTable" style="width: 100%;" >
+	  <div class="divTableHeading">
+	    <div class="divTableRow">
+	      <div class="divTableCell small hidden-xs">Mapa</div>
+  	      <div class="divTableCell small hidden-xs">Estado</div>
+	      <div class="divTableCell small hidden-xs">Ciudad</div>
+	      <div class="divTableCell">Central</div>
+	      <div class="divTableCell small hidden-xs">Cluster</div>
+	      <div class="divTableCell">Hostname</div>
+	      <div class="divTableCell">IP</div>
+	      <div class="divTableCell">Casos</div>
+	    </div>
+	  </div>
+	  <div class="divTableBody">
+	  {% for equipos in inventario %}
+	    <div class="divTableRow">
+	      <div class="divTableCell small hidden-xs">{{ equipos.divisional }}</div>
+	      <div class="divTableCell small hidden-xs">{{ equipos.estado }}</div>
+ 	      <div class="divTableCell small hidden-xs">{{ equipos.ciudad }}</div>
+	      <div class="divTableCell">{{ equipos.ccentral }}</div>
+	      <div class="divTableCell small hidden-xs">{{ equipos.cluster_ce }}</div>
+	      <div class="divTableCell"><a class='iframe' href="{% url 'detalle_equipo' equipos.id %}" data-lightbox-title="Detalles" data-lightbox-description="<p>{{ equipos.hostname }}</p>" data-lightbox-iframe-scroll="true">{{ equipos.hostname }}</a></div>
+	      <div class="divTableCell">{{ equipos.ip_lb0 }}</div>
+	      <div class="divTableCell">{% if equipos.casos == 0 %}
+		{{ "-" }}
+		{% elif equipos.casos > 0 and equipos.casos <= 5 %}
+		<a class='iframe' href="{% url 'historico_casos' equipos.id %}">{{ equipos.casos }}</a>
+		{% elif equipos.casos > 5 %}
+		<a class='iframe' href="{% url 'historico_casos' equipos.id %}">{{ equipos.casos}} <img src="/static/images/fuego.png" width="20" height="20"></a>
+		{% endif %}</div>
+	    </div>
+	  {% endfor %}
+	  </div>
+	</div>
+	<br>
+	<strong>{{ total }}</strong> Equipos registrados
+	<br>
+	<table class="table table-sm">
+	<thead>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-hdd"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.equipos }}</td>
+	    {% endfor %}
+	  </tr>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-wrench"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.casos }}</td>
+	    {% endfor %}
+	  </tr>
+	  <tr>
+	    <td id="col-x"><span class="glyphicon glyphicon-scale"></span></td>
+	    {% for datos in resumen %}
+	    <td id="col-x">{{ datos.porc }} %</td>
+	    {% endfor %}
+	  </tr>
+	</thead>
+	</table>
+  </div>
+</div>
+</section>
+<!-- End cat Area -->
+{% endblock %}

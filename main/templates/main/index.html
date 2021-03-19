@@ -1,0 +1,392 @@
+{% extends 'main/base_main.html' %}
+
+{% block body %}
+<!-- Start home-about Area -->
+			<section class="home-about-area section-gap" id="about">
+				<div class="container">
+					<h1 class="mb-10">Telmex / Cisco</h1>
+						<h4>Carrier Ethernet</h4>
+<canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
+<script>
+new Chart(document.getElementById("chartjs-1"),
+{"type":"bar","data":{"labels":[{% for caso in inventario_ce %} 
+			"{{ caso.nombre }}",
+			{% endfor %}],
+ "datasets":[{"label":"CE","data":[{% for caso in inventario_ce %} 
+			"{{ caso.count }}",
+			{% endfor %}],
+ "fill":false,
+ "backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"], 
+ "borderColor"    :["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)", "rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],
+ "borderWidth":1}]},
+ "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}});
+</script>
+						<h4>Optica</h4>
+<canvas id="chartjs-2" class="chartjs" width="undefined" height="undefined"></canvas>
+<script>
+new Chart(document.getElementById("chartjs-2"),
+{"type":"bar","data":{"labels":[{% for caso in inventario_optica %} 
+			"{{ caso.nombre }}",
+			{% endfor %}],
+ "datasets":[{"label":"Optica","data":[{% for caso in inventario_optica %} 
+			"{{ caso.count }}",
+			{% endfor %}],
+ "fill":false,
+ "backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"], 
+ "borderColor"    :["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)", "rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],
+ "borderWidth":1}]},
+ "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}});
+</script>
+
+
+
+				</div>	
+			</section>
+			<!-- End home-about Area -->
+<!-- Start cat Area -->
+	<!-- Start service Area -->
+	<section class="service-area section-gap" id="service">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 pb-30 header-text text-center">
+					<p><h3>Casos, responsable, c&oacute;digos de cierre</h3></p>
+				</div>
+			</div>
+					
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="single-service">
+						<div class="thumb">
+						</div>
+						<h4>Carrier Ethernet</h4>
+						<p>General - Responsable<br><canvas id="doughnutChart5"></p>
+						<p>Cisco - C&oacute;digos de Cierre<br><canvas id="doughnutChart"></p>
+						<p>Telmex - C&oacute;digos de Cierre<br><canvas id="doughnutChart2"></p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="single-service">
+						<div class="thumb">
+						</div>
+						<h4>Optica</h4>
+						<p>General - Responsable<br><canvas id="doughnutChart6"></p>
+						<p>Cisco - C&oacute;digos de Cierre<br><canvas id="doughnutChart3"></p>
+						<p>Telmex - C&oacute;digos de Cierre<br><canvas id="doughnutChart4"></p>
+					</div>
+				</div>
+												
+			</div>
+		</div>	
+	</section>
+	<!-- End service Area -->
+	<!-- Start faq Area -->
+	<section class="faq-area section-gap relative">
+		<div class="overlay overlay-bg"></div>
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<br>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5><span class="counter">{{ eq_ce }}</span></h5>
+						<p>Equipos Carrier Ethernet</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5><span class="counter">{{ casos_ce }}</span></h5>
+						<p>Casos Carrier Ethernet<br>desde Septiembre 2010</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5 class="counter">{{ eq_op }}</h5>
+						<p>Equipos Optica</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-faq">
+						<div class="circle">
+						  <div class="inner"></div>
+						</div>
+						<h5 class="counter">{{ casos_op }}</h5>
+						<p>Casos Optica<br>desde Noviembre 2013</p>
+					</div>
+				</div>																		
+			</div>
+		</div>	
+	</section>
+	<!-- End faq Area -->
+	<section class="cat-area section-gap" id="feature">
+		<div class="container">							
+			<div class="row">
+				<div class="col-lg-4">	
+					<div class="single-cat d-flex flex-column">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-magic-wand"></span></span></a>
+						<h4 class="mb-20" style="margin-top: 23px;">Maintenance</h4>
+						<p>
+							Conocer si un problema es recurrente en un equipo.
+						</p>
+					</div>															
+				</div>
+				<div class="col-lg-4">	
+					<div class="single-cat">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-rocket"></span></span></a>
+						<h4 class="mt-40 mb-20">Residental Service</h4>
+						<p>
+							Posibilidad de realizar busquedas con diferentes opciones.
+						</p>
+					</div>															
+				</div>
+				<div class="col-lg-4">
+					<div class="single-cat">
+						<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-bug"></span></span></a>
+						<h4 class="mt-40 mb-20">Commercial Service</h4>
+						<p>
+							Conocer problemas reportados y la soluci&oacute;n brindada.
+
+						</p>
+					</div>							
+				</div>
+			</div>
+		</div>	
+	</section>
+	<script>
+	//doughnut
+	var ctxD = document.getElementById("doughnutChart").getContext('2d');
+	var ctxD2 = document.getElementById("doughnutChart2").getContext('2d');
+	var ctxD3 = document.getElementById("doughnutChart3").getContext('2d');
+	var ctxD4 = document.getElementById("doughnutChart4").getContext('2d');
+	var ctxD5 = document.getElementById("doughnutChart5").getContext('2d');
+	var ctxD6 = document.getElementById("doughnutChart6").getContext('2d');
+	
+	
+
+	var myLineChart = new Chart(ctxD, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_cisco_ce %} 
+			"{{ caso.codigo_cierre }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_cisco_ce %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }
+	    }
+	});
+	var myLineChart2 = new Chart(ctxD2, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_telmex_ce %} 
+			"{{ caso.codigo_cierre }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_telmex_ce %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }
+	    }
+	});
+	var myLineChart3 = new Chart(ctxD3, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_cisco_optica %} 
+			"{{ caso.codigo_cierre }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_cisco_optica %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }
+	    }
+	});
+	var myLineChart4 = new Chart(ctxD4, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_telmex_optica %} 
+			"{{ caso.codigo_cierre }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_telmex_optica %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }	
+	    }
+	});
+	var myLineChart5 = new Chart(ctxD5, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_ce %} 
+			"{{ caso.responsable }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_ce %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }	
+	    }
+	});
+	var myLineChart6 = new Chart(ctxD6, {
+	    type: 'doughnut',
+	    data: {
+	        labels: [{% for caso in casos_resumen_optica %} 
+			"{{ caso.responsable }}",
+			{% endfor %}],
+	        datasets: [
+	            {
+		        data: [{% for caso in casos_resumen_optica %} 
+			{{ caso.sum  }},
+			{% endfor %}],
+	                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#0066ff", "#99ffcc", "#ffce00", "#4a0065", "#bd0000"],
+        	        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#6699ff", "#ccffcc", "#ffe783", "#6300b8", "#ff6700"]
+	            }
+	        ]
+	    },
+	    options: {
+	        responsive: true,
+    		legend: {
+   		   position: 'bottom',
+    		},
+		tooltips: {
+     		 callbacks: {
+    		    label: function(tooltipItem, data) {
+   		     	var dataset = data.datasets[tooltipItem.datasetIndex];
+   		        var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+    		        return previousValue + currentValue;
+    		      });
+    		      var currentValue = dataset.data[tooltipItem.index];
+    		      var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+    		      return currentValue + " - (" + precentage + "%)";
+		    }
+    		 }
+   	       }	
+	    }
+	});
+
+	</script>
+	<!-- End cat Area -->
+{% endblock %}

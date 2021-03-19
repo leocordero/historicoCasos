@@ -1,0 +1,21 @@
+{% extends 'main/base_login.html' %}
+
+{% block body %}
+<section class="home-about-area section-gap" id="about">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+		    <div class="col-lg-4 col-md-12 home-about-right relative">
+			<h4 class="text-white pb-20">Inicio de Sesi&oacute;n</h4>  
+			<form method="post" class="form-wrap">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <button type="submit" class="primary-btn">Login</button>
+			</form>
+		    </div>
+		</div>
+	</div>	
+</section>
+
+{% endblock %}
+
+Opssss! Pagina no encontrada

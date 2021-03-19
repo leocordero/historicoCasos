@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+{% for equipo in detalle %}
+<h2>{{ equipo.clli }}</h2>
+<h3>{{ equipo.modelo_equipoo }}</h3>
+<br>
+<div class="panel with-nav-tabs panel-default">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1default" data-toggle="tab">Datos</a></li>
+            <li><a href="#tab2default" data-toggle="tab">Direcci&oacute;n</a></li>
+            <li><a href="#tab3default" data-toggle="tab">Equipamiento</a></li>
+            <li><a href="#tab4default" data-toggle="tab">Casos</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1default">
+	    <table width="100%" border="0">
+	      <tr>
+	        <td><strong>IP Loopback0</strong></td>
+	        <td>{{ equipo.ip_lb0 }}</td>
+	        <td><strong>IP Loopback1</strong></td>
+	        <td>{{ equipo.ip_lb1 }}</td>
+	      </tr>
+	      <tr>
+	        <td><strong>Divisional</strong></td>
+	        <td>{{ equipo.divisional }}</td>
+	        <td><strong>Estado</strong></td>
+	        <td>{{ equipo.estado }}</td>
+	      </tr>
+	      <tr>
+	        <td><strong>Ciudad</strong></td>
+	        <td>{{ equipo.ciudad }}</td>
+	        <td><strong>Cluster</strong></td>
+	        <td>{{ equipo.cluster }}</td>
+	      </tr>
+	      <tr>
+	        <td><strong>Central</strong></td>
+	        <td colspan="3">{{ equipo.central }}</td>
+	      </tr>
+	      <tr>
+	        <td><strong>Direccion</strong></td>
+	        <td colspan="3">{{ equipo.direccion }}</td>
+	      </tr>
+	      <tr>
+	        <td><strong>Ultimas Limpiezas</strong></td>
+	        <td colspan="3">{% for limp in limpiezas %}
+		{{ limp.fecha }} - {{ limp.observacion }}<br>
+		{% endfor %}
+		</td>
+	      </tr>
+	    </table>
+	    </div>
+            <div class="tab-pane fade" id="tab2default">
+		{% if equipo.localizacion != None %}
+       	 	 <iframe src="{{ equipo.localizacion }}" width="800" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+     		{% endif %}
+	    </div>
+	    <div class="tab-pane fade" id="tab3default">
+	    {{ partes }}
+	    </div>
+	    <div class="tab-pane fade" id="tab4default">
+		<a href="{% url 'historico_casos' equipo.id %}">Historico de casos</a>
+	    </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</html>

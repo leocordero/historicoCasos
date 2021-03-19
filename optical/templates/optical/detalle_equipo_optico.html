@@ -1,0 +1,124 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+{% for equipo in detalle %}
+<h2>{{ equipo.clli }}</h2>
+<h3>{{ equipo.modelo_equipo_optico }}</h3>
+<br>
+<div class="panel with-nav-tabs panel-default">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1default" data-toggle="tab">Datos</a></li>
+            <li><a href="#tab2default" data-toggle="tab">Direcci&oacute;n</a></li>
+            <li><a href="#tab3default" data-toggle="tab">Equipamiento</a></li>
+            <li><a href="#tab4default" data-toggle="tab">Casos</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1default">
+<table width="100%" border="0">
+  <tr>
+    <td><strong>IP</strong></td>
+    <td>{{ equipo.ip }}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><strong>Network Partition</strong></td>
+    <td>{{ equipo.network_partition }}</td>
+    <td><strong>Subnetwork</strong></td>
+    <td>{{ equipo.sub_network }}</td>
+  </tr>
+  <tr>
+    <td><strong>Estado</strong></td>
+    <td>{{ equipo.estado }}</td>
+    <td><strong>Ciudad</strong></td>
+    <td>{{ equipo.ciudad }}</td>
+  </tr>
+  <tr>
+    <td><strong>Dir Divisional</strong></td>
+    <td>{{ equipo.dir_divisional }}</td>
+    <td><strong>Area Divisional</strong></td>
+    <td>{{ equipo.area_divisional }}</td>
+  </tr>
+  <tr>
+    <td><strong>Central/Cliente</strong></td>
+    <td colspan="3">
+	{% if equipo.cliente == None %}
+	{{ equipo.ccentral }}
+	{% elif equipo.ccentral == None %}
+	{{ equipo.cliente }}
+	{% endif %}</td>
+  </tr>
+  <tr>
+    <td><strong>Direccion</strong></td>
+    <td colspan="3">
+	{% if equipo.dir_cliente == None %}
+	{{ equipo.dir_central }}
+	{% elif equipo.dir_central == None %}
+	{{ equipo.dir_cliente }}
+	{% endif %}
+    </td>
+  </tr>
+</table>
+
+
+	    </div>
+            <div class="tab-pane fade" id="tab2default">
+		{% if equipo.localizacion != None %}
+	          <iframe src="{{ equipo.localizacion }}" width="970" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+	        {% endif %}
+	    </div>
+	    <div class="tab-pane fade" id="tab3default">
+		
+		<p>Inventario de 
+		{% if mes == 1 %}
+		{{ "Enero" }}
+		{% elif mes == 2 %}
+		{{ "Febrero" }}
+		{% elif mes == 3 %}
+		{{ "Marzo" }}
+		{% elif mes == 4 %}
+		{{ "Abril" }}
+		{% elif mes == 5 %}
+		{{ "Mayo" }}
+		{% elif mes == 6 %}
+		{{ "Junio" }}
+		{% elif mes == 7 %}
+		{{ "Julio" }}
+		{% elif mes == 8 %}
+		{{ "Agosto" }}
+		{% elif mes == 9 %}
+		{{ "Septiembre" }}
+		{% elif mes == 10 %}
+		{{ "Octubre" }}
+		{% elif mes == 11 %}
+		{{ "Noviembre" }}
+		{% elif mes == 12 %}
+		{{ "Diciembre" }}
+		{% endif %} 
+		/ {{ anio }}
+		  <table cellpadding="4" border="1">
+		    <tr>
+			<th>Localizaci&oacute;n F&iacute;sica</th><th>Tipo</th><th>ID</th><th>SN</th><th>Estado</th>
+		    </tr>
+		{% for equipamiento in partes %}
+		    <tr>
+			<td>{{ equipamiento.physical_location }}&nbsp;</td><td>{{ equipamiento.equipment_type }}&nbsp;</td><td>{{ equipamiento.product_id }}&nbsp;</td><td>{{ equipamiento.sn }}&nbsp;</td><td>{{ equipamiento.equipment_state }}&nbsp;</td>
+		    </tr>
+		{% endfor %}
+		  </table>
+	    </div>
+	    <div class="tab-pane fade" id="tab4default">
+		<a href="{% url 'historico_casos_optica' equipo.id %}">Historico de casos</a>
+	    </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</html>
